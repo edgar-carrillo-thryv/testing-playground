@@ -1,6 +1,6 @@
-export const formatContactName = (firstName = "", lastName = "") => {
+export const formatContactName = (firstName = '', lastName = '') => {
   const cleanupName = (name) => {
-    return name.replaceAll(",", "").trim()
+    return name.replaceAll(',', '').trim()
   }
 
   let formattedFirstName = cleanupName(firstName)
@@ -8,15 +8,12 @@ export const formatContactName = (firstName = "", lastName = "") => {
 
   const firstNameUnknown = () => {
     return (
-      formattedFirstName.toLowerCase() === "unknown" ||
-      formattedFirstName === ""
+      formattedFirstName.toLowerCase() === 'unknown' || formattedFirstName === ''
     )
   }
 
   const lastNameUnknown = () => {
-    return (
-      formattedLastName.toLowerCase() === "unknown" || formattedLastName === ""
-    )
+    return formattedLastName.toLowerCase() === 'unknown' || formattedLastName === ''
   }
 
   const fullNameUnknown = () => {
@@ -27,11 +24,16 @@ export const formatContactName = (firstName = "", lastName = "") => {
     return formattedFirstName.includes(formattedLastName)
   }
 
-  if (fullNameUnknown()) return "unknown"
+  const firstAndLastNameAreSame = () => {
+    return formattedFirstName === formattedLastName
+  }
+
+  if (fullNameUnknown()) return 'unknown'
   if (firstNameUnknown()) return formattedLastName
   if (lastNameUnknown()) return formattedFirstName
+  if (firstAndLastNameAreSame()) return formattedFirstName.trim()
   if (firstNameHasLastname()) {
-    formattedFirstName = formattedFirstName.replace(formattedLastName, "")
+    formattedFirstName = formattedFirstName.replace(formattedLastName, '').trim()
   }
 
   return `${formattedFirstName} ${formattedLastName}`
