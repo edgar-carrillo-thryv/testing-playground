@@ -115,6 +115,16 @@ describe('Test threadName response resolver', () => {
       })
       expect(response(context)).toBe('Edgar Carrillo')
     })
+
+    test('If firstName or lastName is not a string, return unknown', () => {
+      const context = createContext({
+        firstName: {
+          type: '',
+          email: 'email@gmail.com',
+        },
+      })
+      expect(response(context)).toBe('unknown')
+    })
   })
 
   describe('Email Tests', () => {

@@ -1,5 +1,6 @@
 export const formatContactName = (firstName = '', lastName = '') => {
   const cleanupName = (name) => {
+    if (typeof name !== 'string') return ''
     return name.replaceAll(',', '').trim()
   }
 
