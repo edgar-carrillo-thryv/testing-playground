@@ -97,6 +97,30 @@ describe('Test threadName response resolver', () => {
       expect(response(context)).toBe('Garlen')
     })
 
+    test('If firstName & surname contain the same name but are different, return the fullname', () => {
+      const context = createContext({
+        firstName: 'Jack',
+        lastName: 'Jackson',
+      })
+      expect(response(context)).toBe('Jack Jackson')
+    })
+
+    test('If firstName & surname contain the same name but are different, return the fullname', () => {
+      const context = createContext({
+        firstName: 'Adonis',
+        lastName: 'Adon',
+      })
+      expect(response(context)).toBe('Adonis Adon')
+    })
+
+    test('If firstName has lastname, return the fullname', () => {
+      const context = createContext({
+        firstName: 'Edgar Carrillo',
+        lastName: 'Carrillo',
+      })
+      expect(response(context)).toBe('Edgar Carrillo')
+    })
+
     test('If full name is provided & email is provided, return just the fullname', () => {
       const context = createContext({
         firstName: 'Edgar',

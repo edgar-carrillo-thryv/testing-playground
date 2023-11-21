@@ -1,3 +1,12 @@
+const escapeRegExpMatch = function (s) {
+  return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')
+}
+
+// Resource: https://stackoverflow.com/questions/60440139/check-if-a-string-contains-exact-match
+const includesExactMatch = (str, match) => {
+  return new RegExp(`\\b${escapeRegExpMatch(match)}\\b`).test(str)
+}
+
 export const formatContactName = (firstName = '', lastName = '') => {
   const cleanupName = (name) => {
     if (typeof name !== 'string') return ''
@@ -22,7 +31,7 @@ export const formatContactName = (firstName = '', lastName = '') => {
   }
 
   const firstNameHasLastname = () => {
-    return formattedFirstName.includes(formattedLastName)
+    return includesExactMatch(formattedFirstName, formattedLastName)
   }
 
   const firstAndLastNameAreSame = () => {
